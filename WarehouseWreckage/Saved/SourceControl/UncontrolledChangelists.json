@@ -1,0 +1,14 @@
+{
+	"version": 1,
+	"changelists": [
+		{
+			"guid": "00000000000000000000000000000000",
+			"description": "Default Uncontrolled Changelist",
+			"files": [
+				"C:/Users/logan/Desktop/Creative Endeavors/Game Dev/Unreal/Tutorial Games/WarehouseWreckage/Content/StarterContent/Architecture/Floor_400x400.uasset",
+				"C:/Users/logan/Desktop/Creative Endeavors/Game Dev/Unreal/Tutorial Games/WarehouseWreckage/Content/StarterContent/Maps/Minimal_Default.umap",
+				"C:/Users/logan/Desktop/Creative Endeavors/Game Dev/Unreal/Tutorial Games/WarehouseWreckage/Content/BP_Projectile.uasset"
+			]
+		}
+	]
+}
