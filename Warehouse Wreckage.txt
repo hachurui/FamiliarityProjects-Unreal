@@ -1,0 +1,148 @@
+2.2: Project Setup
+Open the Blueprint editor by select the gate-fork icon beside object quick add and clicking "Open Level Blueprint".
+
+2.4: BluePrint Event Graph
+Blueprints is basically building block programming.
+Right click to access select menu.
+Pins: The term for the connectors between blueprint nodes.
+Input pins dictate when a node is execute, output pins dictate what happens after.
+So BeginPlay nodes only have an output pins due to it being an Event node, it's "when" innately decided.
+
+2.6: Objects and References
+Objects - Collections of data and functionality.
+Actors - Objects that go into a level. 
+Component - Objects that go onto an actor.
+Reference - Object address. Where to find it.
+Data Pin - Visually appears like input and output pins from before, this time a blue circle arrow. Pretty much the means the node is producing a reference to its associated object.
+Execution Pins = the name of input and output pins pintype. The "other" of data pins.
+
+Create a reference to an object in blueprint editor by selecting the object in the level editor, switching to the blueprint editor and right clicking. An option to "Create a reference to OBJECT" will appear.
+
+Grab a data pin and drop it in empty space to choose from a menu of all characteristics of associate object.
+Can repeat this process for produced nodes and continue the process. Immediate example from lecture was grab the static mesh component from cube, then call the get display name function from static mesh component, then from the produced node of that function print the display name.
+ERROR: the name of the static mesh component was not printing. The problem was I accidently created a log string node instead of a print string node. Happened because when I typed in the name of the blueprint, print string came up, but the focus was on the log string blueprint and I just hit enter. Oopsies.
+
+The lecture asked to print the mass of the static mesh component. Easy enough, drag and drop the data pin and grab the get mass function. Since the return value is a float, need to convert it to a string, which I intuited, then connect to print string. However, if you connect get mass blueprint to an already created print string node, it will automatically create a convert node.
+
+2.7: Adding an Impulse
+Impulse is an immediate change to the velocity of an object.
+An impulse has a couple a characteristics:
+- The impulse itself, a vector3d which dictates how much of the three dimensions the object will move in
+- Vel Change, a Boolean that dictates whether the mass and gravity of an object should be calculated in by default or not (vel change true means mass and gravity are automatically factored in, vel change false means you have to calculate it yourself.
+
+2.8: Blueprint Classes and Instances
+In the outliner, in the heading of an object's detail tab, beside the "Add" button, click the fork button to create a blueprint.
+Standard naming convention is "BP_ObjectName".
+
+Standard class/godot node/etc. aspects. Changing the blueprint changes all instances of the blueprint.
+
+2.9: Spawning Actors
+Spawning: creating an object during playtime
+Transform: location, rotation, and scale.
+Return Pin: Output of a node.
+
+2.10: Data Types
+Went over what data types are (went over integers, floats, strings, bools)
+Struct - An object that is usually small (goofy given definition lol)
+Data Type - shape of our data (once again)
+
+Structs seen so far:
+Vectors, a set of three floats used to represent position, scale, etc.
+Rotator, also a set of three floats
+Transforms, three sets of three float, each set representing location, rotation, and scale.
+
+Objects we've seen
+Actors (cube, BP_Projectile)
+Components (StaticMeshComponent)
+
+2.11: Pawns and Actor Location
+Ejecting: when playing the game from the viewport, you can hit F8 to eject from the pawn your controlling.
+
+2.12: Control Rotation
+Pretty much learnt you can use player pawn property "control rotation" as a reference to what direction the player camera is looking
+
+2.13: Vector Addition & Multiplication
+What is a Vector? Mathematically, a direction in a 3D space and a size/magnitude. Programmatically, three floats.
+If you have two vectors and add its contents together, the results will be obviously be a collection of three floats that act as a relational vector.
+So as redundant or obvious as it is to explicitly state it, if you have a vector, vecA, and add it to itself to make vecB, vecB will be equal to vecA + vecA, or vecA*2, or double the length in the same direction as vecA.
+
+Practice problem for course gives three vector2Ds, A, B, C with values (7, -1), (0, 2), and (-3, 2) respectively. If you start at (-5, -2) and travel A + (3 * B) - C where would you end up? (7, -1) + 3(0,2) - (-3,2) or (7,-1) + (0,6) + (3,-2). so (-5,-2) + (10, 3) and end up at coordinate (5, 1). (confirmation, i was right, yay!)
+
+2.14: Get Forward Vector
+Forward vector is a vector who's 3 directional basis is relational to a determined entity, circumstance, etc. So, in this example, a vector who's x-axis is parallel to the direction the player's camera is facing. The value of the floats inside forward vectors (as well as other relational vectors) are equal to 1.
+
+Using blueprints, can pull the forward vector from the spawnactor node's data pin or the static mesh component.
+Take the return value, throw it through a multiply blueprint, connect that to the impulse blueprint's impulse input pin, and voila!
+
+2.15: Importing Assets
+Assets can be acquired in the marketplace (named "Fab") directly in the epic games launcher.
+ERROR ERROR, this is no longer the case. Or atleast doesn't have to be. Fab has a plugin that integrates it directly into unreal engine. Can be accessed through the Content Drawer
+
+2.16: Geometry Brushes (BSP/Binary Space Partitioning)
+Pretty much just learnt that in place actors menu, the geometry section can be use to add the basic shapes of a level
+Specifically you can use an additive, say, box to create the chunk of level and create a barely smaller subtractive box to hollow it out.
+
+2.17: Materials and Lighting
+Can literally copy and paste the logic of a level through blueprints by selecting the blueprints in the level editor, copying them and pasting in the new level's level editor.
+Can drag and drop material from assets onto geometry
+
+2.18: Actor Components
+Actors can have multiple static mesh components (example in lecture is giving a base rack structure individual shelves). So drag and drop shelf mesh onto the rack's static mesh component, making the shelf a child of the rack.
+Children of other actor's location, as well as the rotation, scale, is relative to the actor's location. So my rack may be at location (1540, -870, -280) but my shelf's, who's position is at the bottom of the rack, location is (0, 0, 0,)
+Just have to enable physics on the root actor and they will have act together.
+
+2.19: Collision Meshes
+Can change the type of view in the viewport by clicking one of the labels in the top left, typically set as "lit". Can change to wireframe view, or collision, etc.
+
+Can double click meshes in the content drawer to open the mesh editor. Here you can change, among other things, the collision box of the mesh. In this lecture we deleted to default mesh of SM_Barrel01 and changed it to a 10DOP-Z Simplified Collision. Can hit the "edit blueprint for actor" button (symbol is a fork) after selecting relevant mesh and change that blueprints collision to create a class that can be easily duplicated and modified.
+
+2.20: Variables
+Hey, did you know variables help us store, manipulate and refer to information?
+A variable has a name, data and a type.
+
+In the level blueprint editor, in the window "My Blueprint" one of the dropdown menus is dedicated to variables
+Here we make a variable named ammo with type Integer to store how many cannonball shots the player has.
+Had to compile the blueprint in order to declare the default value.
+Wanna dynamically edit the value of a variable? Drag and drop the variable from the My Blueprint window into the level blueprint editor and choose from the Get or Set in this case. (CTRL + Drag = Get, ALT + Drag = Set)
+
+So to make an ammo tracker that prints out ammo amount everytime the player shoots:
+Get ammo into a subtrack node - 1 into a set ammo node. Impulse into the set node into a print string, it's return node to string to the print string data pin.
+
+2.21: Booleans and Branches
+Branch Nodes - Branches let us check if something is true or not then do something based upon the result. (if statements?)
+Booleans - a yes or no data type
+Comparison - Less than, Greater than, equal, etc.
+
+2.22: Functions
+In level blueprint editor can select a group of nodes and press "c" and it will create a visual block around the group that you can use as a comment
+Many of the nodes/blueprints are functions, and we can create our own
+
+Something the lecturer said that I like and haven't heard before:
+	"The measure of code quality = 'What the heck's per minute"
+Function names should be verbs
+
+Can select multiple nodes, right click, then collapse to function to, well, collapse these nodes into a single node. This condensed node can than be opened in another blueprint editor to edit.
+
+2.23: Return Types
+For added functionality, you can select a function in the my blueprint window, then in the details window (default right side of the screen) can hit the plus sign in "Inputs" or "Outputs" to had inputs and outputs.
+If you automatically collapse nodes into a function node that necessitates a return value, the generated node will have that return pin.
+
+2.24 Pure Functions
+Side effect - when a function has an observable effect after running
+	e.g. Print string, Add impulse, set ammo
+Pure function - function with no side effects, however has return values
+	e.g. getters (get ammo, get actor forward vector) and calculations (multiply, minus, greater)
+Because these pure functions don't have observable effects, their correlated node don't need execution pins.
+
+In the detail window of a created blueprint node, you can flip the option labelled "Pure" to make it a pure function with no execution pins.
+
+2.25: Member Functions
+Member function - a function on a class, always called on a particular instance
+
+Create member functions by opening the blueprint editor of a class blueprint and add a function similar to how you would in the level editor.
+
+Implicitly, any member function has a parameter which is its current target/instance. Accessible by right clicking in the editor and get "self"
+
+2.26: Loading Levels & Delay Nodes
+Delay nodes can be positioned between two nodes as a temporal buffer between the execution of the nodes.
+Made a function that got the get current level node and opened the level by name 5 seconds after attempting to fire a projectile when the player is out of ammunition.
