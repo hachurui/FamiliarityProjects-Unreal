@@ -1,0 +1,41 @@
+3.1: Section Intro
+Action plan:
+- create a project with our assets
+- install the tools for c++
+- c++ basics
+- make a platform that moves
+- configure moving platform
+- send the platform back
+- rotating platforms
+
+Overview of learning topics:
+- Function, variables and branches in c++
+- Creating a c++ actor
+- c++ code structure
+- c++ compilation and live coding
+- linking blueprint to c++
+- setting our own custom character class
+
+3.3: Customizing the Character
+UE5 has a default 3rd person character blueprint, aptly named BP_ThirdPersonCharacter, that you can grab from Content Drawer->Add->Add Feature or Content Pack->Third Person
+
+The learning kit used in lecture has a preselected character for player to control. Deleted that, instead grabbed the default BP_ThirdPersonCharacter, and created a child blueprint class. In the editor, under details, there's an option called "Auto Possess Player". Setting that to Player 0 gives control of this character to the player.
+
+Lecturer was using a character pack that's no longer available for ue5 fab, so a part of the course was trouble shooting that specific problem. Using the ue5 base character worked fine.
+
+In blueprint editor under details you can change the skeletal mesh (appearance) of the character
+
+3.4: Compilers and Editors
+Source Code - Human readable code
+Binary Executable - machine readable code
+Compiler - Translates from human to machine
+Source Code Editor - take a guess lol
+
+3.9: Compiling a C++ Project
+Create C++ classes on Tools->Create C++ Class
+
+Compile Your C++:
+	- Create a class
+	- Open VSCode
+	- Compile the Editor
+	- Relaunch the project
