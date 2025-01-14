@@ -39,3 +39,99 @@ Compile Your C++:
 	- Open VSCode
 	- Compile the Editor
 	- Relaunch the project
+
+3.10: UPROPERTY Variables
+UPROPERTY is a method of declaring variables in your source code editor and having them appear in the engine editor as changeable values in the outliner.
+In the class header, under public, syntax is as follows:
+UPROPERTY(EditAnywhere)
+int32 MyInt = 99;
+	
+UPROPERTY(EditAnywhere)
+float MyFloat = 5.99;
+
+UPROPERTY(EditAnywhere)
+bool MyBool = true;
+
+Note the lack of ; after (EditAnywhere)
+
+3.12: C++ Files and BeginPlay
+BeginPlay() in the cpp file is code existed on game start or when the instance of the class is spawned.
+
+3.13: Using Structs in C++
+Constructor - makes a new instance of a struct or class
+Operator - symbols that do something (this guys good but his definitions... eh)
+e.g. +, -, =, *, /
+Dot Operator - Access a property of a struct or class
+
+3.15: Tick
+Game Loop:
+1. Process Input
+2. Update game state
+3. Render to display
+
+Frame - a single picture in a video
+Frame rate - How many frames per second (FPS)
+Tick - a function/event called every frame
+
+3.17: Pseudo Code
+Psuedocode - Plain language description of the steps in an algorithm
+Comments - code that is ignored by the compiler
+
+3.18: Function Return Value
+Expression - Fragment of code that produces a value.
+Statement - An action to be performed
+
+3.19: Velocity & DeltaTime
+Using DeltaTime Unreal can tell us how long each frame took to execute.
+When we multiply something by DeltaTime it makes our game "frame rate independent".
+
+3.20: Scope Resolution Operator
+Scope Resolution Operator - (::) Looks inside a class
+Example used was - FVector::Dist(FVector1, FVector2);
+
+3.21: If Statements
+They're if statements
+
+3.22: Using Member Functions
+Like Member variables.. but functions! :D
+
+3.23:
+
+3.25: GameMode
+Game Mode - An Actor that controls the "rules". e.g. Who should spawn where.
+In blueprint creation beside quickly add to project has an option to create a gamemode under project settings where we can choose what pawn to control by default among other things. (World override gamemode is for level specific gamemodes.)
+In the blueprint editor, under detail, under classes, the option "Default Pawn Class" can be switched to the blueprint you intend to be controlled by the player (BP_3rdPersonCharacter in my familiarity project). After, can put in a "Player Start" actor and that will act as the player's spawn point.
+
+3.26: Writing to the Output Log
+"ulog" in vscode with unreal enginge 4 snippets to automatically fill out, otherwise: UE_LOG(LogTemp, Display, Text("Your message"));
+Instead of 'Display', can use Warning, Error, even Fatal among other things.
+Injecting variables into strings works like this:
+TEXT("My float value is %f"), MyFloat;
+
+3.27: FString
+Wanna log a string? 
+UE_LOG(LogTemp, Display, TEXT("Here's My String: %s"), *MyString);
+
+3.28: Member Functions
+Function be functions. He went over private instead of public classifications I guess *shrug*
+
+3.29: Return Statements
+return statements :)
+
+3.30: Const Member Functions
+Const functions cannot modify the state of your class
+
+put "const" at end of function declaration line in both head and cpp file
+
+3.31: FRotator
+Here's the relevant code from lecture:
+
+void AMovingPlatform::RotatePlatform(float pDeltaTime)
+{
+	FRotator CurrentRotation = GetActorRotation();
+	AddActorLocalRotation(RotationVelocity * pDeltaTime);
+}
+
+
+
+

@@ -15,7 +15,10 @@ AMovingPlatform::AMovingPlatform()
 void AMovingPlatform::BeginPlay()
 {
 	Super::BeginPlay();
-	SetActorLocation(StartLocation);
+	StartLocation = GetActorLocation();
+
+	FString MyString = GetName();
+	UE_LOG(LogTemp, Display, TEXT("BeginPlay: %s"), *MyString);
 }
 
 // Called every frame
@@ -23,9 +26,43 @@ void AMovingPlatform::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	FVector CurrentLocation = GetActorLocation();
-	FVector NewLocation = (CurrentLocation + PlatformVelocity* DeltaTime);
-	SetActorLocation(NewLocation);
-
+	MovePlatform(DeltaTime);
+	RotatePlatform(DeltaTime);
 }
 
+void AMovingPlatform::MovePlatform(float pDeltaTime)
+{
+		//If the object has moved the distance, reverse the velocity, making sure to move the object back by any amount of distance it overshot
+	if(ShouldPlatformReverse())
+	{
+		FVector MoveDirection = PlatformVelocity.GetSafeNormal();
+
+			//set the platform to the max distance it should've moved by
+		StartLocation = StartLocation + MoveDirection*MoveDistance; 
+		SetActorLocation(StartLocation);
+		PlatformVelocity = -PlatformVelocity; //switches direction
+	}
+	else
+	{
+			//Grab current location of obj, add velocity to it, set new location
+		FVector CurrentLocation = GetActorLocation();
+		FVector NewLocation = CurrentLocation + (PlatformVelocity * pDeltaTime);
+		SetActorLocation(NewLocation);
+	}
+}
+
+void AMovingPlatform::RotatePlatform(float pDeltaTime)
+{
+	FRotator CurrentRotation = GetActorRotation();
+	AddActorLocalRotation(RotationVelocity * pDeltaTime);
+}
+
+bool AMovingPlatform::ShouldPlatformReverse() const
+{
+	return GetDistanceMoved() >= MoveDistance;
+}
+
+float AMovingPlatform::GetDistanceMoved() const
+{
+	return FVector::Dist(StartLocation, GetActorLocation());
+}

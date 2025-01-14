@@ -23,18 +23,29 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+private:
+	// Delcare and initialize class variables and functions
 	UPROPERTY(EditAnywhere)
-	FVector StartLocation = FVector(-7500, -20710, 2460);
+	FVector StartLocation = FVector(-7340,-20710,2460);
 
 	UPROPERTY(EditAnywhere)
-	FVector EndLocation = FVector(StartLocation.X, StartLocation.Y+100, StartLocation.Z);
+	FVector EndLocation = FVector(StartLocation.X, StartLocation.Y, StartLocation.Z);
 
 	UPROPERTY(EditAnywhere)
 	int TravelTime = 10; //How long it takes to travel between the two points
 
-	UPROPERTY(EditAnywhere, Category="Moving Platform");
+	UPROPERTY(EditAnywhere, Category="Moving Platform")
 	FVector PlatformVelocity = FVector(100,0,0);
 
-	
-	int direction = 1;
+	UPROPERTY(EditAnywhere, Category="Moving Platform")
+	float MoveDistance = 100;
+
+	UPROPERTY(EditAnywhere)
+	FRotator RotationVelocity;
+
+	void MovePlatform(float pDeltaTime);
+	void RotatePlatform(float pDeltaTime);
+
+	bool ShouldPlatformReverse() const;
+	float GetDistanceMoved() const;
 };
