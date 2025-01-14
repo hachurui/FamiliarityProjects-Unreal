@@ -16,6 +16,17 @@
 *.dylib
 *.dll
 
+# Ignore all log files
+*.log
+
+# Unreal Engine specific logs
+Saved/Logs/
+*.csv
+*.log
+
+# Ignore any CSV profiler logs
+LogCsvProfiler:*
+
 # Fortran module files
 *.mod
 
