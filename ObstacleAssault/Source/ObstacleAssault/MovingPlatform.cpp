@@ -15,13 +15,17 @@ AMovingPlatform::AMovingPlatform()
 void AMovingPlatform::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	SetActorLocation(StartLocation);
 }
 
 // Called every frame
 void AMovingPlatform::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	FVector CurrentLocation = GetActorLocation();
+	FVector NewLocation = (CurrentLocation + PlatformVelocity* DeltaTime);
+	SetActorLocation(NewLocation);
 
 }
 
