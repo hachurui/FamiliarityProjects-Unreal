@@ -1,0 +1,14 @@
+{
+	"version": 1,
+	"changelists": [
+		{
+			"guid": "00000000000000000000000000000000",
+			"description": "Default Uncontrolled Changelist",
+			"files": [
+				"C:/Users/logan/Desktop/Creative Endeavors/Game Dev/Unreal/Tutorial Games/ObstacleAssault/Content/Main.umap",
+				"C:/Users/logan/Desktop/Creative Endeavors/Game Dev/Unreal/Tutorial Games/ObstacleAssault/Content/ThirdPerson/Blueprints/BP_ThirdPersonCharacter.uasset",
+				"C:/Users/logan/Desktop/Creative Endeavors/Game Dev/Unreal/Tutorial Games/ObstacleAssault/Content/BP_3rdPersonCharacter.uasset"
+			]
+		}
+	]
+}
